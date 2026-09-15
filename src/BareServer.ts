@@ -1,4 +1,4 @@
-import type { LookupOneOptions } from 'node:dns';
+import type { LookupOptions } from 'node:dns';
 import EventEmitter from 'node:events';
 import { readFileSync } from 'node:fs';
 import type {
@@ -145,7 +145,7 @@ export interface Options {
 	 */
 	lookup: (
 		hostname: string,
-		options: LookupOneOptions,
+		options: LookupOptions,
 		callback: (
 			err: NodeJS.ErrnoException | null,
 			address: string,
@@ -321,7 +321,7 @@ export default class Server extends EventEmitter {
 		const request = new Request(new URL(req.url!, 'http://bare-server-node'), {
 			method: req.method,
 			body: nullMethod.includes(req.method || '') ? undefined : req,
-			headers: req.headers as HeadersInit,
+			headers: req.headers as any,
 		}) as BareRequest;
 
 		request.native = req;
@@ -380,7 +380,7 @@ export default class Server extends EventEmitter {
 		const request = new Request(new URL(req.url!, 'http://bare-server-node'), {
 			method: req.method,
 			body: nullMethod.includes(req.method || '') ? undefined : req,
-			headers: req.headers as HeadersInit,
+			headers: req.headers as any,
 			duplex: 'half',
 		}) as BareRequest;
 

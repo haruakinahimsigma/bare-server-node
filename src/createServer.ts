@@ -107,7 +107,7 @@ export function createBareServer(directory: string, init: BareServerInit = {}) {
 					)
 				)
 					callback(new RangeError('Forbidden IP'), '', -1);
-				else callback(err, address, family);
+				else callback(err, typeof address === 'string' ? address : address[0]?.address || '', typeof address === 'string' ? (family ?? -1) : (address[0]?.family ?? -1));
 			});
 	}
 
