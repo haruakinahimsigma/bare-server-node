@@ -1,4 +1,4 @@
-import type { LookupOneOptions } from 'node:dns';
+import type { LookupFunction } from 'node:dns';
 import EventEmitter from 'node:events';
 import { readFileSync } from 'node:fs';
 import type {
@@ -143,15 +143,7 @@ export interface Options {
 	 * May not get called when remote.host is an IP
 	 * Use in combination with filterRemote to block IPs
 	 */
-	lookup: (
-		hostname: string,
-		options: LookupOneOptions,
-		callback: (
-			err: NodeJS.ErrnoException | null,
-			address: string,
-			family: number,
-		) => void,
-	) => void;
+	lookup: LookupFunction;
 	localAddress?: string;
 	family?: number;
 	maintainer?: BareMaintainer;
