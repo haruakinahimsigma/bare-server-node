@@ -462,7 +462,7 @@ const tunnelSocket: SocketRouteCallback = async (
 		remoteSocket.end();
 	});
 
-	const remoteHeaders = new Headers(remoteResponse.headers as HeadersInit);
+	const remoteHeaders = new Headers(remoteResponse.headers as any);
 
 	meta.value.response = {
 		headers: mapHeadersFromArray(rawHeaderNames(remoteResponse.rawHeaders), {
